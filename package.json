@@ -1,5 +1,11 @@
 
 {
+  "name": "@madamun/rollup_101",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "description": "Your library description",
+  "author": "Your Name",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
