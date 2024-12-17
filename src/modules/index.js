@@ -1,5 +1,5 @@
-// src/modules/index.js
-const CustomModal = require('./CustomModal');
-const SpecialForm = require('./SpecialForm'); // ตัวอย่างโมดูลอื่น
+// src/base-components/index.js
+const Button = require('./Button');
+const Input = require('./Input');
 
-module.exports = { CustomModal, SpecialForm };
+module.exports = { Button, Input }; // Export เป็น Object
