@@ -1,0 +1,35 @@
+name: Release Automation
+
+on:
+  push:
+    branches:
+      - main  # เมื่อ push เข้า main ให้ทำ release อัตโนมัติ
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Bump version and create tag
+        run: |
+          npm version patch -m "chore(release): bump version to %s"
+          git push --follow-tags
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref }}
+          name: "Release ${{ github.ref }}"
+          body: "## What's New\n - Automated release from CI/CD"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
