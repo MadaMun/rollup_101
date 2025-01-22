@@ -22,7 +22,10 @@ jobs:
 
       - name: Bump version and create tag
         run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
           npm version patch -m "chore(release): bump version to %s"
+          
           git push --follow-tags
 
       - name: Create GitHub Release
