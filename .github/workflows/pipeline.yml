@@ -1,6 +1,7 @@
 name: Release Automation
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  # เมื่อ push เข้า main ให้ทำ release อัตโนมัติ
