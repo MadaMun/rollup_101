@@ -27,14 +27,13 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           npm version patch -m "chore(release): bump version to %s"
-          
           git push --follow-tags
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          name: "Release ${{ github.ref }}"
+          tag_name: ${{ github.ref_name }}
+          name: "Release ${{ github.ref_name }}"
           body: "## What's New\n - Automated release from CI/CD"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
