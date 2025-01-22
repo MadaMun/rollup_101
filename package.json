@@ -24,6 +24,7 @@
     "rollup": "^4.28.1"
   },
   "dependencies": {
-    "@madamun/rollup_101": "^1.0.2"
+    "@madamun/rollup_101": "^1.0.2",
+    "fellow": "7.4.0"
   }
 }
