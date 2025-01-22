@@ -26,6 +26,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git checkout main
           npm version patch -m "chore(release): bump version to %s"
           git push --follow-tags
 
