@@ -1,4 +1,3 @@
-
 {
   "name": "@madamun/rollup_101",
   "version": "1.0.5",
@@ -18,12 +17,13 @@
     "url": "https://github.com/madamun/rollup_101/issues"
   },
   "homepage": "https://github.com/madamun/rollup_101#readme",
-
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "rollup": "^4.28.1"
-    
+  },
+  "dependencies": {
+    "@madamun/rollup_101": "^1.0.2"
   }
 }
