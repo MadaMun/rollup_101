@@ -1,6 +1,10 @@
 {
   "name": "@madamun/rollup_101",
+<<<<<<< HEAD
   "version": "1.2.0",
+=======
+  "version": "1.0.18-dev.0",
+>>>>>>> ed1a8c525fbf0d4aa7f828cb86d937f40fe643a1
   "main": "dist/index.js",
   "description": "Your library description",
   "author": "Your Name",
