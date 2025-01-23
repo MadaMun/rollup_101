@@ -86,6 +86,8 @@ jobs:
       - name: Determine new version for main
         id: new_version
         run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
           PR_TITLE="${{ github.event.pull_request.title }}"
           echo "PR Title: $PR_TITLE"
 
@@ -94,10 +96,10 @@ jobs:
             npm version major
           elif echo "$PR_TITLE" | grep -iq "feat:"; then
             echo "Triggering Minor Version Bump"
-            npm version major
+            npm version minor
           elif echo "$PR_TITLE" | grep -iq "fix:"; then
             echo "Triggering Patch Version Bump"
-            npm version major
+            npm version patch
           else
             echo "No significant changes detected."
             npm version patch
