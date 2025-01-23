@@ -58,7 +58,7 @@ on:
 
 jobs:
   build-publish:
-    if: startsWith(github.ref, 'refs/tags/release/')
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }}
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -172,7 +172,7 @@ jobs:
           git push origin dev
 
   build-versioning-dev:
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }} || startsWith(github.ref, 'refs/heads/main/')
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' }}
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -192,23 +192,18 @@ jobs:
       # 3. Install dependencies
       - name: Install dependencies
         run: pnpm install
+        
+      # Optional: Run ESLint
+      - name: Run ESLint
+        run: pnpm eslint:check
 
-      # # 4. Build Rollup
-      # - name: Build rollup
-      #   run: pnpm build-rollup
+      - name: Run Dependencies Audit
+        run: pnpm audit || true
 
-      #  # Optional: Run ESLint
-      # - name: Run ESLint
-      #   run: pnpm eslint:check
+      # 4. Build Rollup
+      - name: Build rollup
+        run: pnpm build-rollup
 
-      # - name: Run Dependencies Audit
-      #   run: pnpm audit || true
-
-      # - name: Get current version from package.json
-      #   id: get_version
-      #   run: |
-      #     echo "Current version: $(jq -r .version package.json)"
-      #     echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
