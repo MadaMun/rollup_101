@@ -221,7 +221,7 @@ jobs:
       - name: Commit version bump
         run: |
           git add package.json package-lock.json
-          git commit -m "[ACTIONS MESSAGE] Bump version to $(node -p 'require(\"./package.json\").version')"
+          git commit -m "[ACTIONS MESSAGE] Bump version"
           git push origin main
 
 
