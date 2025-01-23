@@ -177,13 +177,13 @@ jobs:
       #   run: pnpm build-rollup
 
       - name: Authenticate with npm registry
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.GIT_TOKEN }}" > ~/.npmrc
 
        # 5. Publish to Firmer Packages
       - name: Publish to Firmer Packages
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
 
       
       - name: Checkout and update dev branch
