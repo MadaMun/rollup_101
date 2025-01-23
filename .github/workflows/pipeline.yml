@@ -251,7 +251,6 @@ jobs:
       - name: Build rollup
         run: pnpm build-rollup
 
-      # Optional: Run ESLint
       - name: Run ESLint
         run: pnpm eslint:check
 
