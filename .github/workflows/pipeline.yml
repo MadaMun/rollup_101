@@ -75,7 +75,6 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@8.6
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: pnpm install
 
