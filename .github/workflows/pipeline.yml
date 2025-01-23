@@ -170,7 +170,7 @@ jobs:
           git push origin dev
 
   build-versioning-dev:
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' }}
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }}
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -212,21 +212,21 @@ jobs:
         id: new_version
         run: npm version prerelease --preid=dev
       
-      - name: Update package.json with new version
-        run: |
-          NEW_VERSION=${{ env.NEW_VERSION }}
-          jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
+      # - name: Update package.json with new version
+      #   run: |
+      #     NEW_VERSION=${{ env.NEW_VERSION }}
+      #     jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git checkout main
-          git pull origin main
-          git add package.json
-          git add pnpm-lock.yaml
-          git commit -m "[ACTIONS MESSAGE] Update package version"
-          git push origin main
+      # - name: Commit and push changes
+      #   run: |
+      #     git config --global user.name 'github-actions'
+      #     git config --global user.email 'github-actions@github.com'
+      #     git checkout main
+      #     git pull origin main
+      #     git add package.json
+      #     git add pnpm-lock.yaml
+      #     git commit -m "[ACTIONS MESSAGE] Update package version"
+      #     git push origin main
 
 
   build-test:
