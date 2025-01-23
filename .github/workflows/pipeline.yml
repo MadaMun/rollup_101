@@ -214,7 +214,9 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          npm version patch -m "chore(release): bump version to %s"
+          npm version prerelease --preid=dev
+
+  # npm version patch -m "chore(release): bump version to %s"
 
       # - name: Update package.json with new version
       #   run: |
