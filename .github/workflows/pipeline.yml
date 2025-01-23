@@ -46,6 +46,8 @@ on:
       - feature/*
       - hotfix/*
       - bugfix/*
+      - main
+
   pull_request:
     types: [closed]
     branches:
