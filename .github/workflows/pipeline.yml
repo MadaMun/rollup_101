@@ -160,6 +160,8 @@ jobs:
           git add package.json package-lock.json
           git commit -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
+        continue-on-error: true
+        
       
       # Optional: Run ESLint
       # - name: Run ESLint
