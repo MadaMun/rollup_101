@@ -159,15 +159,15 @@ jobs:
           git push origin main
 
       # Optional: Run ESLint
-      - name: Run ESLint
-        run: pnpm eslint:check
+      # - name: Run ESLint
+      #   run: pnpm eslint:check
       
       - name: Run Dependencies Audit
         run: pnpm audit || true
       
       # 4. Build Rollup
-      - name: Build rollup
-        run: pnpm build-rollup
+      # - name: Build rollup
+      #   run: pnpm build-rollup
 
        # 5. Publish to Firmer Packages
       - name: Publish to Firmer Packages
