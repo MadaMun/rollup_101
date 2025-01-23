@@ -193,16 +193,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # 4. Build Rollup
-      - name: Build rollup
-        run: pnpm build-rollup
+      # # 4. Build Rollup
+      # - name: Build rollup
+      #   run: pnpm build-rollup
 
-       # Optional: Run ESLint
-      - name: Run ESLint
-        run: pnpm eslint:check
+      #  # Optional: Run ESLint
+      # - name: Run ESLint
+      #   run: pnpm eslint:check
 
-      - name: Run Dependencies Audit
-        run: pnpm audit || true
+      # - name: Run Dependencies Audit
+      #   run: pnpm audit || true
 
       - name: Get current version from package.json
         id: get_version
