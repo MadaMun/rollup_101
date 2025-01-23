@@ -173,6 +173,9 @@ jobs:
       # - name: Build rollup
       #   run: pnpm build-rollup
 
+      - name: Authenticate with npm registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
        # 5. Publish to Firmer Packages
       - name: Publish to Firmer Packages
         run: npm publish --access public
