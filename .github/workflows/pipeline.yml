@@ -210,28 +210,18 @@ jobs:
       #     echo "Current version: $(jq -r .version package.json)"
       #     echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
-      - name: Bump version and create tag
+      - name: Configure Git
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          npm version prerelease --preid=dev
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
-  # npm version patch -m "chore(release): bump version to %s"
+      - name: Bump version
+        run: npm version prerelease --preid=dev --no-git-tag-version
 
-      # - name: Update package.json with new version
-      #   run: |
-      #     NEW_VERSION=${{ env.NEW_VERSION }}
-      #     jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
-
-      - name: Commit and push changes
+      - name: Commit version bump
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git checkout main
-          git pull origin main
-          git add package.json
-          git add pnpm-lock.yaml
-          git commit -m "[ACTIONS MESSAGE] Update package version"
+          git add package.json package-lock.json
+          git commit -m "[ACTIONS MESSAGE] Bump version to $(node -p 'require(\"./package.json\").version')"
           git push origin main
 
 
