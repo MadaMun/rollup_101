@@ -204,16 +204,17 @@ jobs:
       # - name: Run Dependencies Audit
       #   run: pnpm audit || true
 
-      - name: Get current version from package.json
-        id: get_version
-        run: |
-          echo "Current version: $(jq -r .version package.json)"
-          echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+      # - name: Get current version from package.json
+      #   id: get_version
+      #   run: |
+      #     echo "Current version: $(jq -r .version package.json)"
+      #     echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
-      - name: Determine new version for dev
-        id: new_version
-        run: npm version prerelease --preid=dev
-      
+      - name: Bump version and create tag
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          npm version patch -m "chore(release): bump version to %s"
       # - name: Update package.json with new version
       #   run: |
       #     NEW_VERSION=${{ env.NEW_VERSION }}
