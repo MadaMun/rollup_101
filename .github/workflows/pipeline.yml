@@ -58,7 +58,7 @@ on:
 
 jobs:
   build-publish:
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }}
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }} || startsWith(github.ref, 'refs/heads/feature/')
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
