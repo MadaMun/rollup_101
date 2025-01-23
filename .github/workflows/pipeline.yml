@@ -40,6 +40,9 @@
 
 name: Build and Publish Packages
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 on:
   push:
     branches:
