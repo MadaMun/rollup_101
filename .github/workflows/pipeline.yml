@@ -60,7 +60,7 @@ on:
 
 jobs:
   build-publish:
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }} || startsWith(github.ref, 'refs/heads/main/')
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' }} 
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -98,57 +98,8 @@ jobs:
             npm version patch
           fi
   
-
       - name: Install dependencies
         run: pnpm install
-
-      # - name: Get current version from package.json
-      #   id: get_version
-      #   run: |
-      #     echo "Current version: $(jq -r .version package.json)"
-      #     echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-          
-
-      # - name: Determine new version for main
-      #   id: new_version
-      #   run: |
-      #     CURRENT_VERSION=${{ env.CURRENT_VERSION }}
-      #     BASE_VERSION=$(echo $CURRENT_VERSION | sed -E 's/-dev\.[0-9]+//')
-      #     NEW_VERSION=$BASE_VERSION
-
-      #     IFS='.' read -r MAJOR MINOR PATCH <<< "$BASE_VERSION"
-
-      #     PR_TITLE="${{ github.event.pull_request.title }}"
-      #     echo "PR Title: $PR_TITLE"
-
-      #     if echo "$PR_TITLE" | grep -iq "BREAKING CHANGE"; then
-      #       echo "Triggering Major Version Bump"
-      #       MAJOR=$((MAJOR + 1))
-      #       MINOR=0
-      #       PATCH=0
-      #     elif echo "$PR_TITLE" | grep -iq "feat:"; then
-      #       echo "Triggering Minor Version Bump"
-      #       MINOR=$((MINOR + 1))
-      #       PATCH=0
-      #     elif echo "$PR_TITLE" | grep -iq "fix:"; then
-      #       echo "Triggering Patch Version Bump"
-      #       PATCH=$((PATCH + 1))
-      #     else
-      #       echo "No significant changes detected."
-      #       PATCH=$((PATCH + 1))
-      #     fi
-          
-      #     NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
-      #     NEW_DEV_VERSION="${MAJOR}.${MINOR}.${PATCH}-dev.0"
-
-      #     echo "New version: $NEW_VERSION"
-      #     echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-      #     echo "NEW_DEV_VERSION=$NEW_DEV_VERSION" >> $GITHUB_ENV
-      
-      # - name: Update package.json with new version
-      #   run: |
-      #     NEW_VERSION=${{ env.NEW_VERSION }}
-      #     jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
           
       - name: Commit and push changes
         run: |
@@ -167,12 +118,8 @@ jobs:
       # - name: Run Dependencies Audit
       #   run: pnpm audit || true
       
-      # 4. Build Rollup
       # - name: Build rollup
       #   run: pnpm build-rollup
-
-      - name: Authenticate with npm registry
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.GIT_TOKEN }}" > ~/.npmrc
 
       - name: Publish to Firmer Packages
         run: npm publish --access public
