@@ -1,6 +1,6 @@
 {
   "name": "@madamun/rollup_101",
-  "version": "3.0.0",
+  "version": "3.0.1-dev.1",
   "main": "dist/index.js",
   "description": "Your library description",
   "author": "MadaMun",

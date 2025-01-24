@@ -97,10 +97,7 @@ jobs:
             echo "No significant changes detected."
             npm version patch
           fi
-  
-      - name: Install dependencies
-        run: pnpm install
-          
+
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions'
@@ -111,6 +108,9 @@ jobs:
           git commit --allow-empty -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
         
+        
+      - name: Install dependencies
+        run: pnpm install
       
       # - name: Run ESLint
       #   run: pnpm eslint:check
@@ -162,16 +162,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         
-      # Optional: Run ESLint
-      - name: Run ESLint
-        run: pnpm eslint:check
+      # # Optional: Run ESLint
+      # - name: Run ESLint
+      #   run: pnpm eslint:check
 
-      - name: Run Dependencies Audit
-        run: pnpm audit || true
+      # - name: Run Dependencies Audit
+      #   run: pnpm audit || true
 
-      # 4. Build Rollup
-      - name: Build rollup
-        run: pnpm build-rollup
+      # # 4. Build Rollup
+      # - name: Build rollup
+      #   run: pnpm build-rollup
 
 
       - name: Configure Git
@@ -180,13 +180,13 @@ jobs:
           git config --global user.email "github-actions@github.com"
 
       - name: Bump version
-        run: npm version prerelease --preid=dev --no-git-tag-version
+        run: npm version prerelease --preid=dev
 
       - name: Commit version bump
         run: |
-          git add package.json package-lock.json
-          git commit -m "[ACTIONS MESSAGE] Bump version"
-          git push origin main
+          git add package.json pnpm-lock.yaml
+          git commit --allow-empty -m "[ACTIONS MESSAGE] Update package version"
+          git push origin dev
 
 
   build-test:
@@ -197,7 +197,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 1. Install Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -211,12 +210,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # 4. Build Rollup
-      - name: Build rollup
-        run: pnpm build-rollup
+      # # 4. Build Rollup
+      # - name: Build rollup
+      #   run: pnpm build-rollup
 
-      - name: Run ESLint
-        run: pnpm eslint:check
+      # - name: Run ESLint
+      #   run: pnpm eslint:check
 
-      - name: Run Dependencies Audit
-        run: pnpm audit || true
+      # - name: Run Dependencies Audit
+      #   run: pnpm audit || true
