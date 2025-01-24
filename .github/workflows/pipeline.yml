@@ -161,7 +161,6 @@ jobs:
           git commit -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
         continue-on-error: true
-e
         
       
       # - name: Run ESLint
