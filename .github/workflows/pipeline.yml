@@ -28,14 +28,6 @@
           
 #           git push --follow-tags
 
-#       - name: Create GitHub Release
-#         uses: softprops/action-gh-release@v2
-#         with:
-#           tag_name: ${{ github.ref }}
-#           name: "Release ${{ github.ref }}"
-#           body: "## What's New\n - Automated release from CI/CD"
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 name: Build and Publish Packages
@@ -126,6 +118,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
 
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref }}
+          name: "Release ${{ github.ref }}"
+          body: "## What's New\n - Automated release from CI/CD"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Checkout and update dev branch
         run: |
