@@ -186,14 +186,9 @@ jobs:
           git checkout dev
           git merge origin/main --no-ff --allow-unrelated-histories || true
 
-          git checkout --ours package.json
-          git add  package.json
-          git commit -m "[ACTIONS MESSAGE] Resolved merge conflicts by accepting changes from main"
-
-          NEW_DEV_VERSION=${{ env.NEW_DEV_VERSION }}
-          jq ".version = \"$NEW_DEV_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
-          git add package.json
+          git add .
           git commit -m "[ACTIONS MESSAGE] Update package version"
+          npm version prerelease --preid=dev
           git push origin dev
         continue-on-error: true
         
