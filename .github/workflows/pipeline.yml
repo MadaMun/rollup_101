@@ -185,8 +185,8 @@ jobs:
       - name: Commit version bump
         run: |
           git add package.json pnpm-lock.yaml
-          git commit -m "[ACTIONS MESSAGE] Bump version"
-          git push origin main
+          git commit --allow-empty -m "[ACTIONS MESSAGE] Update package version"
+          git push origin dev
 
 
   build-test:
