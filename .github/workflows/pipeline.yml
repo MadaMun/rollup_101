@@ -93,7 +93,7 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           PR_TITLE="${{ github.event.pull_request.title }}"
           echo "PR Title: $PR_TITLE"
-
+          git status
           if echo "$PR_TITLE" | grep -iq "BREAKING CHANGE"; then
             echo "Triggering Major Version Bump"
             npm version major
