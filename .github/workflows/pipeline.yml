@@ -74,6 +74,9 @@ jobs:
         with:
           node-version: "18"
 
+      - name: Install pnpm
+        run: npm install -g pnpm@8.6
+
       - name: Determine new version for main
         id: new_version
         run: |
@@ -95,9 +98,7 @@ jobs:
             echo "No significant changes detected."
             npm version patch
           fi
-      
-      - name: Install pnpm
-        run: npm install -g pnpm@8.6
+  
 
       - name: Install dependencies
         run: pnpm install
