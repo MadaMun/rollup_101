@@ -158,9 +158,8 @@ jobs:
           git checkout main
           git pull origin main
           git add package.json pnpm-lock.yaml
-          git commit -m "[ACTIONS MESSAGE] Update package version"
+          git commit --allow-empty -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
-        continue-on-error: true
         
       
       # - name: Run ESLint
@@ -197,7 +196,8 @@ jobs:
           git add package.json
           git commit -m "[ACTIONS MESSAGE] Update package version"
           git push origin dev
-
+        continue-on-error: true
+        
   build-versioning-dev:
     if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' }}
     runs-on: ubuntu-latest
