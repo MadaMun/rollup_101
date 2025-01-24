@@ -184,9 +184,9 @@ jobs:
         run: |
           git fetch origin dev
           git checkout dev
-          git pull --rebase origin main
+          git pull origin dev
           git merge origin/main --no-ff --allow-unrelated-histories || true
-
+          git checkout --theirs .
           git add .
           git commit -m "[ACTIONS MESSAGE] Update package version"
           npm version prerelease --preid=dev
