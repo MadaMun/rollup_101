@@ -74,18 +74,6 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install pnpm
-        run: npm install -g pnpm@8.6
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Get current version from package.json
-        id: get_version
-        run: |
-          echo "Current version: $(jq -r .version package.json)"
-          echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-
       - name: Determine new version for main
         id: new_version
         run: |
@@ -107,6 +95,18 @@ jobs:
             echo "No significant changes detected."
             npm version patch
           fi
+      
+      - name: Install pnpm
+        run: npm install -g pnpm@8.6
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # - name: Get current version from package.json
+      #   id: get_version
+      #   run: |
+      #     echo "Current version: $(jq -r .version package.json)"
+      #     echo "CURRENT_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
           
 
       # - name: Determine new version for main
@@ -169,8 +169,8 @@ jobs:
       # - name: Run ESLint
       #   run: pnpm eslint:check
       
-      - name: Run Dependencies Audit
-        run: pnpm audit || true
+      # - name: Run Dependencies Audit
+      #   run: pnpm audit || true
       
       # 4. Build Rollup
       # - name: Build rollup
@@ -179,7 +179,6 @@ jobs:
       - name: Authenticate with npm registry
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.GIT_TOKEN }}" > ~/.npmrc
 
-       # 5. Publish to Firmer Packages
       - name: Publish to Firmer Packages
         run: npm publish --access public
         env:
