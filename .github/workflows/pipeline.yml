@@ -183,8 +183,8 @@ jobs:
       - name: Checkout and update dev branch
         run: |
           git fetch origin dev
-          git pull --rebase origin dev
           git checkout dev
+          git pull --rebase origin main
           git merge origin/main --no-ff --allow-unrelated-histories || true
 
           git add .
