@@ -161,8 +161,7 @@ jobs:
 
       - name: Commit version bump
         run: |
-          git add package.json
-          git add package-lock.json
+          git add package.json pnpm-lock.yaml
           git commit -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
         continue-on-error: true
