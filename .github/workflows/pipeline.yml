@@ -157,14 +157,11 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git checkout main
           git pull origin main
-        continue-on-error: true
-
-      - name: Commit version bump
-        run: |
           git add package.json pnpm-lock.yaml
           git commit -m "[ACTIONS MESSAGE] Update package version"
           git push origin main
         continue-on-error: true
+e
         
       
       # - name: Run ESLint
