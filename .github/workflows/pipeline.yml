@@ -118,12 +118,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
 
-      
+      - name: Create and push new tag
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "PACKAGE_VERSION=$(npm pkg get version | tr -d '\"')" >> $GITHUB_ENV
+          git tag ${{ env.PACKAGE_VERSION }}
+          git push origin ${{ env.PACKAGE_VERSION }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref.name }}
-          name: "Release ${{ github.ref.name }}"
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          name: "Release ${{ env.PACKAGE_VERSION }}"
           body: "## What's New\n - Automated release from CI/CD"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
