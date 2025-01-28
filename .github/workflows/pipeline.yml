@@ -155,13 +155,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 1. Install Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # 2. Install pnpm
       - name: Install pnpm
         run: npm install -g pnpm@8.6
 
@@ -188,6 +186,11 @@ jobs:
 
       - name: Bump version
         run: npm version prerelease --preid=dev
+
+      - name: Publish to Firmer Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
 
       - name: Commit version bump
         run: |
