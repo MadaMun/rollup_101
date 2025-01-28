@@ -107,8 +107,8 @@ jobs:
       # - name: Run ESLint
       #   run: pnpm eslint:check
       
-      # - name: Run Dependencies Audit
-      #   run: pnpm audit || true
+      - name: Run Dependencies Audit
+        run: pnpm audit || true
       
       # - name: Build rollup
       #   run: pnpm build-rollup
