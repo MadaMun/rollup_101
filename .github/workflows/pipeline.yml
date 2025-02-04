@@ -1,35 +1,3 @@
-# name: Release Automation
-
-# on:
-#   push:
-#     branches:
-#       - main  # เมื่อ push เข้า main ให้ทำ release อัตโนมัติ
-
-# jobs:
-#   release:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: '20'
-
-#       - name: Install dependencies
-#         run: npm install
-
-#       - name: Bump version and create tag
-#         run: |
-#           git config --global user.name 'github-actions'
-#           git config --global user.email 'github-actions@github.com'
-#           npm version patch -m "chore(release): bump version to %s"
-          
-#           git push --follow-tags
-
-
-
 name: Build and Publish Packages
 
 env:
@@ -49,6 +17,8 @@ on:
       - dev
       - release/*
 
+  repository_dispatch:
+    types: [update_dependencies]
 
 jobs:
   build-publish:
@@ -59,7 +29,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 1. Install Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -156,13 +125,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 1. Install Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # 2. Install pnpm
       - name: Install pnpm
         run: npm install -g pnpm@8.6
 
@@ -190,8 +157,14 @@ jobs:
       - name: Bump version
         run: npm version prerelease --preid=dev
 
+      - name: Publish to Firmer Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
+
       - name: Commit version bump
         run: |
+          git checkout dev
           git add package.json pnpm-lock.yaml
           git commit --allow-empty -m "[ACTIONS MESSAGE] Update package version"
           git push origin dev
@@ -227,3 +200,36 @@ jobs:
 
       # - name: Run Dependencies Audit
       #   run: pnpm audit || true
+
+  automation_update_package_for_production:
+    if: github.event_name == 'repository_dispatch'
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install pnpm
+        run: yarn add -g pnpm@8.6
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install package
+        run: yarn add @FellowLIS/fellow-components
+
+      - name: Build rollup
+        run: yarn build-rollup
+
+      - name: commit
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git checkout main
+          git status
+    
