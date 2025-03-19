@@ -2,6 +2,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
+import esbuild from 'rollup-plugin-esbuild';
 
 export default {
   input: 'src/index.js', // จุดเริ่มต้นของโปรเจกต์
