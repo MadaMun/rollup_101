@@ -60,6 +60,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
     "rollup": "^4.35.0",
+    "rollup-plugin-esbuild": "^6.2.1",
     "serve": "^14.2.3",
     "uuid": "^9.0.1"
   },

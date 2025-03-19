@@ -63,7 +63,7 @@ jobs:
 
       # 4. Build Rollup
       - name: Build rollup
-        run: pnpm build-rollup
+        run: pnpm pnpm rollup -c
 
       - name: Commit and push changes
         run: |
