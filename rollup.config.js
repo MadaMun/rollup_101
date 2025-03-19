@@ -1,9 +1,9 @@
 
-const commonjs = require('@rollup/plugin-commonjs');
-const resolve = require('@rollup/plugin-node-resolve');
-const babel = require('@rollup/plugin-babel').default;
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
 
-module.exports = {
+export default {
   input: 'src/index.js', // จุดเริ่มต้นของโปรเจกต์
   output: [
     // การตั้งค่าผลลัพธ์แบบรวมทุกอย่าง
@@ -21,12 +21,17 @@ module.exports = {
       exports: 'named',
     },
   ],
+  maxParallelFileOps: 10,
   plugins: [
     resolve(), // Resolve dependencies
     commonjs(), // รองรับ CommonJS modules
-    babel({
-      babelHelpers: 'bundled', // ใช้ Babel สำหรับแปลงไฟล์
-      exclude: 'node_modules/**', // ไม่แปลงไฟล์ใน node_modules
+    // babel({
+    //   babelHelpers: 'bundled', // ใช้ Babel สำหรับแปลงไฟล์
+    //   exclude: 'node_modules/**', // ไม่แปลงไฟล์ใน node_modules
+    // }
+    esbuild({          // ✅ เพิ่มความเร็วในการแปลงโค้ด
+      minify: true,    // ✅ เปิดการบีบอัดไฟล์ (Minification)
+      target: 'es2015' // ✅ กำหนดเป้าหมายเป็น ES2015 เพื่อรองรับ Browser เก่า
     }),
   ],
 };
