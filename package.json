@@ -1,9 +1,10 @@
 {
   "name": "@madamun/rollup_101",
-  "version": "3.4.2",
+  "version": "6.0.0",
   "main": "dist/index.js",
   "description": "Your library description",
   "author": "MadaMun",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/madamun/rollup_101.git"
@@ -14,12 +15,61 @@
   },
   "homepage": "https://github.com/madamun/rollup_101#readme",
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "rollup": "^4.28.1"
+    "@types/autosuggest-highlight": "^3.2.3",
+    "@types/lodash": "^4.17.9",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.16",
+    "cypress": "^13.12.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.31",
+    "prettier": "3.0.3",
+    "start-server-and-test": "^2.0.4",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   },
   "dependencies": {
-    "@madamun/rollup_101": "1.0.8-dev.0"
+    "@ant-design/icons": "^5.2.6",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.1",
+    "@mui/material": "^6.1.1",
+    "@mui/x-date-pickers": "^7.18.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@tanstack/react-query": "^4.36.1",
+    "antd": "5.14.1",
+    "autosuggest-highlight": "^3.3.4",
+    "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
+    "esbuild": "^0.24.2",
+    "formik": "^2.4.6",
+    "jwt-decode": "^4.0.0",
+    "react": "^18.2.0",
+    "react-cookie": "^7.1.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0",
+    "rollup": "^4.35.0",
+    "serve": "^14.2.3",
+    "uuid": "^9.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "cypress",
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
