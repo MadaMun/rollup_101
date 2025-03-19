@@ -53,6 +53,11 @@ jobs:
             npm version patch
           fi
 
+
+      - name: Setup .npmrc for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_TOKEN }}" >> ~/.npmrc
+        
       - name: Install dependencies
         run: pnpm install
 
