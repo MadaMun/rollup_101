@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-api
+spec:
+  replicas: 1  # ปรับจำนวน Pod ตามต้องการ
+  selector:
+    matchLabels:
+      app: go-api
+  template:
+    metadata:
+      labels:
+        app: go-api
+    spec:
+      containers:
+        - name: go-api-container
+          image: registry.digitalocean.com/container-earth/go-api:5.0.0
+          ports:
+            - containerPort: 8080
