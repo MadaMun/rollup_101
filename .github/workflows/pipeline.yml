@@ -62,7 +62,7 @@ jobs:
         
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --prod --frozen-lockfile --prefer-offline
 
 
       # - name: Check Node Modules Path
