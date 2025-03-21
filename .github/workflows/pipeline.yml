@@ -64,8 +64,8 @@ jobs:
         run: pnpm install
 
 
-      - name: Check Node Modules Path
-        run: ls -la ~/.pnpm-store
+      # - name: Check Node Modules Path
+      #   run: ls -la ~/.pnpm-store
 
       - name: Check node_modules
         run: ls -la node_modules
