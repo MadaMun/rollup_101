@@ -60,12 +60,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_TOKEN }}" >> ~/.npmrc
 
         
-      - name: Check Node Modules Path
-        run: ls -la ~/.pnpm-store
 
-      - name: Check node_modules
-        run: ls -la node_modules
-      
       - name: Install dependencies
         run: pnpm install
 
