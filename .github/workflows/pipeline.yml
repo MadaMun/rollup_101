@@ -10,7 +10,6 @@ on:
 
 jobs:
   build-publish:
-    if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.base.ref, 'main')}}
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
