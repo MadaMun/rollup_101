@@ -58,13 +58,24 @@ jobs:
       - name: Setup .npmrc for GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_TOKEN }}" >> ~/.npmrc
+
         
+      - name: Check Node Modules Path
+        run: ls -la ~/.pnpm-store
+
+      - name: Check node_modules
+        run: ls -la node_modules
+      
       - name: Install dependencies
         run: pnpm install
 
 
       - name: Check Node Modules Path
         run: ls -la ~/.pnpm-store
+
+      - name: Check node_modules
+        run: ls -la node_modules
+      
       
       # 4. Build Rollup
       - name: Build rollup
