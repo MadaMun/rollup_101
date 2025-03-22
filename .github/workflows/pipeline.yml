@@ -59,7 +59,15 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_TOKEN }}" >> ~/.npmrc
 
-        
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: ./
+          args: >
+            -Dsonar.projectKey=my-nodejs-project
+            -Dsonar.host.url=${{ secrets.SONARQUBE_URL }}
+            -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
 
       - name: Install dependencies
         run: pnpm install --prod --frozen-lockfile --prefer-offline
