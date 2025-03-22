@@ -65,8 +65,8 @@ jobs:
           projectBaseDir: ./
           args: >
             -Dsonar.projectKey=my-nodejs-project
-            -Dsonar.host.url=${{ secrets.SONARQUBE_URL }}
-            -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+            -Dsonar.host.url=http://localhost:9000
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
 
       - name: Install dependencies
